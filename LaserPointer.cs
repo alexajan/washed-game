@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class LaserPointer : MonoBehaviour {
@@ -10,11 +10,10 @@ public class LaserPointer : MonoBehaviour {
 	public Vector3 teleportReticleOffset;
 	public LayerMask teleportMask;
 	public GameObject laserPrefab;
+	
 	private float y;
-
 	private bool shouldTeleport;
 	private GameObject reticle;
-
 	private GameObject laser;
 	private Transform laserTransform;
 	private Vector3 hitPoint;
@@ -24,8 +23,7 @@ public class LaserPointer : MonoBehaviour {
 		get { return SteamVR_Controller.Input((int)trackedObj.index); }
 	}
 
-	void Awake()
-	{
+	void Awake() {
 		trackedObj = GetComponent<SteamVR_TrackedObject>();
 		laser = Instantiate(laserPrefab);
 		laserTransform = laser.transform;
@@ -35,31 +33,26 @@ public class LaserPointer : MonoBehaviour {
 	}
 	  
 	void Update () {
-		if (Controller.GetPress(SteamVR_Controller.ButtonMask.Touchpad)) 
-		{
+		if (Controller.GetPress(SteamVR_Controller.ButtonMask.Touchpad)) {
 			RaycastHit hit;
 
-			if (Physics.Raycast(trackedObj.transform.position, transform.forward, out hit, 100, teleportMask)) 
-			{
+			if (Physics.Raycast(trackedObj.transform.position, transform.forward, out hit, 100, teleportMask)) {
 				hitPoint = hit.point;
 				ShowLaser(hit);
 				reticle.SetActive(true);
 				teleportReticleTransform.position = hitPoint + teleportReticleOffset;
 				shouldTeleport = true;
 			}
-		}
-		else 
-		{
+		} else {
 			laser.SetActive(false);
 			reticle.SetActive(false);
 		}
-		if (Controller.GetPressUp(SteamVR_Controller.ButtonMask.Touchpad) && shouldTeleport) 
-		{
+		
+		if (Controller.GetPressUp(SteamVR_Controller.ButtonMask.Touchpad) && shouldTeleport) {
 			Teleport();
 		}
 	}
-	private void ShowLaser(RaycastHit hit)
-	{
+	private void ShowLaser(RaycastHit hit) {
 		
 		laser.SetActive(true);
 
@@ -70,8 +63,8 @@ public class LaserPointer : MonoBehaviour {
 		laserTransform.localScale = new Vector3(laserTransform.localScale.x, laserTransform.localScale.y,
 			hit.distance);
 	}
-	private void Teleport() 
-	{
+	
+	private void Teleport() {
 		shouldTeleport = false;
 		reticle.SetActive (false);
 
