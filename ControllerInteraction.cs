@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,11 +12,6 @@ public class ControllerInteraction : MonoBehaviour {
 
 	void Start() {
 		col = parent.GetComponent<BoxCollider>();
-//		bounds = new Bounds(Vector3.one, Vector3.one);
-//		Renderer thisRenderer = parent.transform.GetComponent<Renderer>();
-//		bounds.Encapsulate(thisRenderer.bounds);
-//		col.center = bounds.center - parent.transform.position;
-//		col.size = bounds.size;
 	}
 
 	void Update() {
@@ -45,7 +40,6 @@ public class ControllerInteraction : MonoBehaviour {
 
 		}
 	}
-
-
+	
 }
 
