@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class SlimeAI : MonoBehaviour {
 	private Animator animator;
-	private float MoveSpeed = 0.5f;
-	private int MaxDist = 20;
 	private Transform child;
 	private GameObject collidingObject;
+	private GameObject bacteria;
 	private int attacks = 0;
 	private int death = 1;
-	private GameObject bacteria;
+	private int MaxDist = 20;
+	private float MoveSpeed = 0.5f;
 	private JellyScore scoreScript;
-
 
 	public GameObject RightController;
 	public GameObject LeftController;
@@ -27,10 +26,8 @@ public class SlimeAI : MonoBehaviour {
 		trackedObj = GetComponent<SteamVR_TrackedObject>();
 		animator = GetComponent<Animator>();
 		scoreScript = GameObject.Find ("dish-rack-full").GetComponent<JellyScore>();
-//		death = GameObject.Find ("TVset").GetComponent<JellyScore>();
 	}
 	
-	// Update is called once per frame
 	void Update () {
 
 		if(Vector3.Distance(transform.position, RightController.transform.position) < MaxDist) {
@@ -58,9 +55,6 @@ public class SlimeAI : MonoBehaviour {
 	}
 
 	public void OnTriggerEnter(Collider other) {
-//		if(other.CompareTag("Bacteria")) {
-//			Destroy(other.gameObject);
-//		}
 		if (other.transform.childCount > 0) {
 			
 			for (int index = 0; index < other.transform.childCount; index++) {
