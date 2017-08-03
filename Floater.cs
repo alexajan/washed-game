@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,13 +13,11 @@ public class Floater : MonoBehaviour {
 
 	Vector3 startPosition;
 
-	// Use this for initialization
 	void Start () {
 		floatObject = this;
 		startPosition = floatObject.transform.position;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (Float) {
 			floatObject.transform.position = startPosition + MoveVector * (MoveRange * Mathf.Sin(Time.timeSinceLevelLoad * MoveSpeed));
