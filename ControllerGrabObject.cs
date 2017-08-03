@@ -1,16 +1,14 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
 public class ControllerGrabObject: MonoBehaviour {
 
-
 	private Text instruction;
-//	private Transform child;
-	private GameObject collidingObject; 
-
+	private GameObject collidingObject;
 	private GameObject objectInHand;
 	private JellyScore scoreScript;
+	
 	public GameObject camera;
 	public Vector3 pos;
 
@@ -22,8 +20,7 @@ public class ControllerGrabObject: MonoBehaviour {
 
 	void Awake() {
 		trackedObj = GetComponent<SteamVR_TrackedObject>();
-		scoreScript = GameObject.Find ("dish-rack-full").GetComponent<JellyScore>();
-//		player = GameObject.Find ("Player");
+		scoreScript = GameObject.Find("dish-rack-full").GetComponent<JellyScore>();
 	}
 
 	private void SetCollidingObject(Collider col) {
@@ -39,15 +36,14 @@ public class ControllerGrabObject: MonoBehaviour {
 		SetCollidingObject(other);
 	}
 
-	// 2
+
 	public void OnTriggerStay(Collider other) {
 		SetCollidingObject(other);
 	}
 
 
 	public void OnTriggerExit(Collider other) {
-		if (!collidingObject)
-		{
+		if (!collidingObject) {
 			return;
 		}
 
@@ -76,15 +72,12 @@ public class ControllerGrabObject: MonoBehaviour {
 			
 			GetComponent<FixedJoint>().connectedBody = null;
 			Destroy(GetComponent<FixedJoint>());
-
-//			objectInHand.GetComponent<Rigidbody>().velocity = Controller.velocity;
-//			objectInHand.GetComponent<Rigidbody>().angularVelocity = Controller.angularVelocity;
 		}
 
 		objectInHand = null;
 	}
 
-	// Update is called once per frame
+
 	void Update () {
 		
 		if (Controller.GetHairTriggerDown()) {
@@ -105,8 +98,6 @@ public class ControllerGrabObject: MonoBehaviour {
 				pos = camera.transform.position;
 				pos.y = pos.y + 0.3f;
 				camera.transform.position = pos;
-//				Physics.IgnoreCollision(collidingObject.GetComponent<Collider>(), this.gameObject.GetComponent<Collider>());
-//				collidingObject.GetComponent<Collider>().isTrigger = true;
 				ReleaseObject();
 				scoreScript.IncrementScore();
 			}
